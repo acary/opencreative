@@ -2,7 +2,11 @@
 
 This is an open-source project for creators using Django. Pull requests welcome.
 
+## Home screen
 <img width="774" alt="Screenshot 2019-11-11 14 42 18" src="https://user-images.githubusercontent.com/1522180/68619660-7fda3f80-0491-11ea-9dcc-8de86e5acf93.png">
+
+## Upvote content
+<img width="1153" alt="Screenshot 2019-11-11 14 58 27" src="https://user-images.githubusercontent.com/1522180/68620742-c0d35380-0493-11ea-9c95-8637a58dba1f.png">
 
 ## Getting Started
 ### Clone repository to your local machine:
