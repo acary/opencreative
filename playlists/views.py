@@ -17,7 +17,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 import urllib
 import requests
 
-YOUTUBE_API_KEY = 'AIzaSyDGKbpAdwZH4idxUnV4ssevfcau7ArtwJU'
+YOUTUBE_API_KEY = '' # Removed for safety
 
 def playlists(request):
     recent_playlists = Playlist.objects.all().order_by(
