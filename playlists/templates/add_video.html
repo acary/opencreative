@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block page_content %}
+<div class="container">
+  <h2>Add Video to {{ playlist.title }}</h2>
+  <form method="post" id="submit_video">
+    {% csrf_token %}
+    {% load widget_tweaks %}
+
+    {% for field in form %}
+    <div class="form-group {% if field.errors %}alert alert-danger{% endif %}">
+      {{ field.errors }}
+      {{ field.label_tag }}
+      {% render_field field class="form-control" %}
+    </div>
+    {% endfor %}
+
+    <button type="submit" class="btn btn-primary">Add</button>
+  </form>
+  <br>
+  <h2>OR</h2>
+  <form>
+    {% for field in search_form %}
+    <div class="form-group">
+      {{ field.errors }}
+      {{ field.label_tag }}
+      {% render_field field class="form-control" %}
+    </div>
+    {% endfor %}
+  </form>
+
+  <div id="search_results"></div>
+  <script>
+    var delayTimer;
+    $('#id_search_term').keyup(function() {
+      clearTimeout(delayTimer);
+      $('#search_results').text('Loading...');
+      delayTimer = setTimeout(function() {
+        var text = $('#id_search_term').val();
+        $.ajax({
+          url: '/video/search',
+          data: {
+            'search_term': text
+          },
+          dataType: 'json',
+          success: function(data) {
+            var results = '';
+            $('#search_results').text('');
+            results += '<div class="row">';
+            data['items'].forEach(function(video) {
+              results += '<div class="col-md-4 mt-3"><div class="card mb-4 shadow-sm">';
+              results += '<iframe width="100%" height="225" src="https://www.youtube.com/embed/' + video['id']['videoId'] +
+                '" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+              results += '<div class="card-body"><p class="card-text">' + video['snippet']['title'] + '</p>';
+              results += '<a href="#" class="btn btn-primary" onclick="addVideo(\'' + video['id']['videoId'] + '\')">Add</a></div></div></div>';
+
+            });
+            results += '</div>';
+            $('#search_results').append(results);
+          }
+        });
+      }, 1000);
+
+    });
+
+    function addVideo(video_id) {
+      $('#id_url').val('https://www.youtube.com/watch?v=' + video_id);
+      $('#submit_video').submit();
+    }
+  </script>
+
+</div>
+{% endblock %}

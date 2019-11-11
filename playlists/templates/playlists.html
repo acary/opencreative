@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block page_content %}
+
+<h1 class="text-center pt-3"><i class="fa fa-play-circle"></i> Playlists</h1>
+
+<hr>
+
+<div class="col-md-8 offset-md-2">
+
+  {% for playlist in recent_playlists %}
+
+  <h3>
+    <a href="{% url 'detail_playlist' playlist.id%}">{{ playlist.title }}</a>
+  </h3>
+
+  <div class="" style="">
+    <a href="{% url 'detail_playlist' playlist.id%}">
+    <img src="https://source.unsplash.com/random/700x300" alt="{{ playlist.title }}">
+    </a>
+  </div>
+
+  <p><span class="badge badge-light">{{ playlist.votes_total }} votes</span>
+  <span class="sr-only">Playlist Votes</span>{{ playlist.commentary }}</p>
+
+  <div class="text-center">
+    <a href="{% url 'detail_playlist' playlist.id%}">
+    <button type="button" class="btn btn-success btn-lg float-none">
+      Watch
+      <span class="sr-only">Watch</span>
+    </button></a>
+  </div>
+<hr>
+  {% endfor %}
+
+  <br>&nbsp;
+</div>
+{% endblock %}
+
+
+{% comment "This is a comment on playlists" %}
+    <h1></h1>
+    <h3></h3>
+    <p></p>
+{% endcomment %}

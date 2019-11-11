@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+
+<h1 class="text-center pt-3"><i class="far fa-paper-plane"></i> Contact</h1>
+
+<form action="{% url 'thanks' %}" class="text-center pt-3">
+  <textarea name="message" rows="8" cols="80"></textarea>
+  <br>
+  <input type="submit" name="send" value="Send" />
+</form>
+
+{% endblock %}

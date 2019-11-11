@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+<main role="main">
+  {% load staticfiles %}
+
+  {% if user.is_authenticated %}
+
+  <div>
+    <section class="color-5">
+      <nav class="cl-effect-12">
+        <a href="/discover">Discover</a>
+        <a href="/create">Create</a>
+        <a href="/publish">Publish</a>
+        <a href="/track">Track</a>
+      </nav>
+    </section>
+  </div>
+
+  <p class="text-right"><small><i class="fas fa-door-open"></i> Welcome, {{ user.username }}!
+  </small>
+  </p>
+
+  <div class="col-md-12" style="min-height:300px;">
+
+      <div class="row">
+        <div class="col-md-7">
+          <h3>My Activity</h3>
+          <hr>
+
+          <div class="text-center">
+            <button type="button" class="btn btn-primary float-none">
+              <i class="far fa-edit"></i> List a Project
+              <span class="sr-only">List a Project</span>
+            </button>
+
+            <button type="button" class="btn btn-secondary float-none">
+              <i class="far fa-edit"></i> View My Bids
+              <span class="sr-only">View My Bids</span>
+            </button>
+
+            <a href="{% url 'project_index' %}">
+            <button type="button" class="btn btn-info float-none">
+              <i class="fas fa-project-diagram"></i> View Active Projects
+              <span class="sr-only">Follow</span>
+            </button>
+            </a>
+          </div>
+
+            <h5>Tasks</h5>
+            <ul>
+              <li>Active Bids: 0 <em>- You can do this!</em></li>
+              <li>In Progress: 1 <em>- Next due: 2 days</em></li>
+              <li>Submitted: 0</li>
+              <li>Accepted: 1 <em>- Accepted 16 hours ago</em></li>
+            </ul>
+
+            <h5>Snapshot</h5>
+            <ul>
+              <li>Earned, not yet paid: $25.00 <em>- Next payout: 3 days</em></li>
+              <li>YTD Earnings: $275.00</li>
+            </ul>
+
+            <h5>History</h5>
+            <ul>
+              <li>Closed: 1</li>
+            </ul>
+
+      </div>
+
+      <div class="col-md-5">
+        <h3>About Me</h3>
+        <hr>
+        <ul>
+          <li>Company: United Productions, LLC</li>
+          <li>User: Best User</li>
+          <li>Rating: 5.0 (220 points)</li>
+          <li>Contributions: 14</li>
+          <li>Skills: Writing, Photography, Videography</li>
+          <li>Portfolio: https://andycary.com</li>
+          <li>Timezone: Central US</li>
+        </ul>
+      </div>
+
+  </div>
+  </div>
+
+  {% else %}
+
+  <section class="jumbotron text-center mt-3" style='background-image: url("https://source.unsplash.com/weekly?travel");background-repeat: no-repeat; background-size: 100%; margin: 5px 5px 5px 5px;'>
+    <div class="container" style='min-height:300px;'>
+      <div style="background-color:rgba(0,0,0,0.5); color: #ffffff; font-family: 'Helvetica Neue', sans-serif; font-size: 14px; line-height: 24px; padding: 10px 3px 3px 3px; margin: 5px 5px 5px 5px;; text-align: justify; text-justify: inter-word;"
+        class="text-center">
+        <h1 style="color: #ffffff; font-family: 'Helvetica Neue', sans-serif; font-size: 75px; font-weight: bold; letter-spacing: -1px; line-height: 1; text-align: center;">Join a community of creators</h1>
+        <h2 style="color: #ffffff; font-family: 'Open Sans', sans-serif; font-size: 30px; font-weight: 300; line-height: 32px; text-align: center;">Are you interested in Food, Music, and Film?</h2>
+
+        <section class="color-10">
+          <nav class="cl-effect-8">
+            <a href="{% url 'sign_up' %}">Signup</a>
+            <a href="{% url 'about' %}">Learn more</a>
+          </nav>
+        </section>
+
+        <h5>You'll be glad you did.</h5>
+      </div>
+    </div>
+  </section>
+
+  <div class="album py-3 bg-light">
+    <div class="container">
+      <h4 class="text-muted" style="font-family: 'Helvetica Neue', sans-serif; font-size: 32px; font-weight: bold; letter-spacing: -1px; line-height: 1;"><a href="{% url 'highlight_index' %}">Highlights</a></h4>
+      <div class="row">
+        {% for post in posts.all %}
+        <div class="col-md-4">
+          <div class="card mb-4 box-shadow">
+            <a href="{% url 'highlight_detail' post.id%}">
+              <img class="card-img-top img-fluid" src="{{ post.image.url}}" alt="">
+            </a>
+            <div class="card-body">
+              <p class="card-text">{{ post.caption }}</p>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+</main>
+
+{% endblock %}

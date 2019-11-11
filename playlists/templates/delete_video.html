@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block page_content %}
+
+<div class="container">
+  <h2>Are you sure you want to delete this video?</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-danger">Delete</button>
+  </form>
+
+  <div class="row">
+    <div class="col-md-4 mt-3">
+      <div class="card mb-4 shadow-sm">
+        <iframe width="100%" height="225" src="https://www.youtube.com/embed/{{ video.youtube_id }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <div class="card-body">
+          <p class="card-text">{{ video.title }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

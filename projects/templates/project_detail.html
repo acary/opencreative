@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_content %}
+
+<div class="col-md-10 offset-md-1 py-2">
+  {% load humanize %}
+
+  <h1 class="text-center pt-3">{{ project.title }}</h1>
+
+  <small>
+      {% for category in project.categories.all %}
+      <a href="#">
+          {{ category.name }}
+      </a>&nbsp;
+      {% endfor %}
+  </small>
+
+  <hr>
+
+  <div class="row">
+    <div class="col-md-6">
+
+      <h5>Project type: Software</h5>
+
+      <p><small>Posted {{ project.pub_date|naturaltime }}</small></p>
+
+    </div>
+
+    <div class="col-md-6">
+
+      <div class="text-right">
+        <a href="javascript:{document.getElementById('project_upvote').submit()}">
+          <button type="button" class="btn btn-primary float-none">
+            <i class="fa fa-arrow-up"></i> <span class="badge badge-light">{{ project.votes_total }}</span>
+            <span class="sr-only">Upvote</span>
+          </button></a>
+
+        <button type="button" class="btn btn-primary float-none">
+          Follow
+          <span class="sr-only">Follow</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+
+      <h5>Short description:</h5>
+      <p>{{ project.description }}</p>
+
+      <h5>Video description:</h5>
+      <p><a href="#"><em>Click to view >></em></a></p>
+
+      <h5>Looking for:</h5>
+      <ul>
+        <li>User testing <em> -- Hey, you're a match!</em></li>
+        <li>Field photography</li>
+        <li>Video editor</li>
+      </ul>
+
+      <h5>Technology:</h5>
+      <p>{{ project.technology }}</p>
+
+      <h5>People behind this project:</h5>
+      <ul>
+        <li>Producer</li>
+        <li>Director</li>
+        <li>Designer</li>
+      </ul>
+
+      <button type="button" class="btn btn-success float-none">
+        Get in touch
+        <span class="sr-only">Get in touch</span>
+      </button>
+
+        <br><br>
+
+    </div>
+
+    <div class="col-md-6">
+
+      <img src="{{ project.image.url }}" alt="" width="100%" class="img-fluid">
+
+    </div>
+  </div>
+
+  <form id="project_upvote" method="POST" action="{% url 'project_upvote' project.id %}">
+    {% csrf_token %}
+    <input type="hidden">
+  </form>
+
+  <a class="" href="{% url 'project_index' %}"><i class="fas fa-chevron-circle-left"></i> <i class="fas fa-project-diagram"></i></a>
+</div>
+{% endblock %}

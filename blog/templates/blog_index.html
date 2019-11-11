@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+
+<h1 class="text-center pt-3"><i class="far fa-newspaper"></i> News</h1>
+
+<div class="col-md-8 offset-md-2 py-3">
+    <hr>
+    {% for post in posts %}
+    <h2><a href="{% url 'blog_detail' post.pk%}">{{ post.title }}</a></h2>
+
+    <a href="{% url 'blog_detail' post.pk%}"><img src="{{ post.image.url }}" height="200"></a>
+    <br />
+
+    </i> <span class="badge badge-light">{{ post.votes_total }} votes</span>
+
+    <small>
+        {{ post.created_on.date }} |&nbsp;
+        {% for category in post.categories.all %}
+        <a href="{% url 'blog_category' category.name %}">
+            {{ category.name }}
+        </a>&nbsp;
+
+        {% endfor %}
+    </small>
+    <p>{{ post.body | slice:":400" }}...</p>
+
+    <a href="{% url 'blog_detail' post.pk%}"><button type="button" class="btn btn-primary"><i class="fas fa-chevron-circle-right"></i> Read</button></a>
+    {% endfor %}
+</div>
+{% endblock %}

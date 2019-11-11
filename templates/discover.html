@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+<main role="main">
+  {% load staticfiles %}
+
+  {% if user.is_authenticated %}
+
+  <div class="">
+    <section class="color-5">
+      <nav class="cl-effect-12">
+        <a href="/discover">Discover</a>
+        <a href="/create">Create</a>
+        <a href="/publish">Publish</a>
+        <a href="/track">Track</a>
+      </nav>
+    </section>
+  </div>
+
+  <p class="text-right"><small><i class="fas fa-door-open"></i> Welcome, {{ user.username }}!
+  </small>
+  </p>
+
+  <div class="container" style="min-height:300px;">
+
+    <a name="discover">
+    <h1>Discover</h1>
+    <hr>
+
+    <h2>Ways to Contribute</h2>
+    <ul>
+      <li><a href="{% url 'project_index' %}">Projects to join</a></li>
+      <li><a href="{% url 'products' %}">Products to promote</a></li>
+    </ul>
+
+    <h2>Content to Promote</h2>
+    <ul>
+      <li><a href="{% url 'highlight_index' %}">Highlights</a></li>
+      <li><a href="{% url 'posts' %}">News Posts</a></li>
+      <li><a href="{% url 'playlists' %}">Video Playlists</a></li>
+    </ul>
+
+    <br>
+
+  </div>
+
+  {% else %}
+
+  <section class="jumbotron text-center mt-3" style='background-image: url("https://source.unsplash.com/weekly?travel");background-repeat: no-repeat; background-size: 100%; margin: 5px 5px 5px 5px;'>
+    <div class="container" style='min-height:300px;'>
+      <div style="background-color:rgba(0,0,0,0.5); color: #ffffff; font-family: 'Helvetica Neue', sans-serif; font-size: 14px; line-height: 24px; padding: 10px 3px 3px 3px; margin: 5px 5px 5px 5px;; text-align: justify; text-justify: inter-word;"
+        class="text-center">
+        <h1 style="color: #ffffff; font-family: 'Helvetica Neue', sans-serif; font-size: 75px; font-weight: bold; letter-spacing: -1px; line-height: 1; text-align: center;">Join a community of creators</h1>
+        <h2 style="color: #ffffff; font-family: 'Open Sans', sans-serif; font-size: 30px; font-weight: 300; line-height: 32px; text-align: center;">Are you interested in Food, Music, and Film?</h2>
+
+        <section class="color-10">
+          <nav class="cl-effect-8">
+            <a href="{% url 'sign_up' %}">Signup</a>
+            <a href="{% url 'about' %}">Learn more</a>
+          </nav>
+        </section>
+
+        <h5>You'll be glad you did.</h5>
+      </div>
+    </div>
+  </section>
+
+  <div class="album py-3 bg-light">
+    <div class="container">
+      <h4 class="text-muted" style="font-family: 'Helvetica Neue', sans-serif; font-size: 32px; font-weight: bold; letter-spacing: -1px; line-height: 1;">Highlights</h4>
+      <div class="row">
+        {% for post in posts.all %}
+        <div class="col-md-4">
+          <div class="card mb-4 box-shadow">
+            <a href="{% url 'highlight_detail' post.id%}">
+              <img class="card-img-top img-fluid" src="{{ post.image.url}}" alt="">
+            </a>
+            <div class="card-body">
+              <p class="card-text">{{ post.caption }}</p>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+</main>
+
+{% endblock %}

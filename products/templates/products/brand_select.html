@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block page_content %}
+
+<div class="col-md-12 py-1">
+
+  {% for offer in offer %}
+
+  <small><a href="{% url 'brand' contributor %}">{{ contributor|capfirst }}</a> > {{ offer.short_name }} > <span class="badge badge-secondary">Select</span></small>
+
+  <h1>{{ category | title }}</h1>
+
+  <hr>
+
+  <div class="col-md-6 mx-auto d-block">
+
+      <!-- <h1 class="text-center">{{ offer.title }}</h1> -->
+
+      <h3>Please select your options:</h3>
+
+    <form action="{% url 'brand_review' contributor %}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.product_type.label_tag }}
+            {{ form.product_type }}
+        </div>
+        <div class="form-group">
+          {{ form.product_size.label_tag }}
+          {{ form.product_size }}
+        </div>
+        <div class="form-group">
+          {{ form.product_freq.label_tag }}
+          {{ form.product_freq }}
+        </div>
+        <button type="submit" class="btn btn-success btn-lg mx-auto d-block">Proceed</button>
+    </form>
+
+  </div>
+
+  <div class="py-1 text-center">
+
+    <small><a href="{% url 'brand' contributor %}">Presented by {{ contributor|capfirst }}</a></small>
+  </div>
+
+  <br>
+  <div class="row">
+    <img src="{{ offer.image.url }}" class="mx-auto d-block" style="max-width:50px;" />
+  </div>
+
+  <div class="row">
+    <p class="mx-auto d-block">{{ offer.summary }}</p>
+  </div>
+
+  <div class="row">
+    <small class="mx-auto d-block">
+      {% for category in offer.categories.all %}
+      <span class="badge badge-secondary">{{ category.name }}
+        {% endfor %}
+    </small>
+  </div>
+
+  {% endfor %}
+
+</div>
+
+<hr>
+{% endblock %}

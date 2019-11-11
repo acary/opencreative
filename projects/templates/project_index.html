@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+<h1 class="text-center pt-3"><i class="fas fa-project-diagram"></i> Projects</h1>
+
+<div class="text-right">
+  <button type="button" class="btn btn-primary float-none">
+    List a Project
+    <span class="sr-only">Follow</span>
+  </button>
+</div>
+
+<div class="row">
+{% for project in projects %}
+    <div class="col-md-4">
+        <div class="card mb-2">
+            <img class="card-img-top img-fluid" src="{{ project.image.url }}">
+            <div class="card-body">
+              <p class="text-right">
+              <small>
+                  {% for category in project.categories.all %}
+                  <a href="#">
+                      {{ category.name }}
+                  </a>&nbsp;
+                  {% endfor %}
+              </small>
+              <a href="{% url 'project_detail' project.pk %}">
+                <h5 class="card-title">{{ project.title }}</h5>
+              </a>
+                <p class="card-text">{{ project.description }}</p>
+
+                <a href="{% url 'project_detail' project.pk %}"
+                   class="btn btn-primary">
+                    Read More
+                </a>
+                <small><span class="badge badge-light">{{ project.votes_total }}</span> votes</small>
+                <br>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

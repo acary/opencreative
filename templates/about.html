@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+
+<main role="main">
+  {% load staticfiles %}
+
+      <section class="jumbotron text-center mt-3" style='background-image: url("https://source.unsplash.com/weekly?travel");background-repeat: no-repeat; background-size: 100%; margin: 5px 5px 5px 5px;'>
+        <div class="container" style='min-height:300px;'>
+          <div style="background-color:rgba(0,0,0,0.5); color: #ffffff; font-family: 'Helvetica Neue', sans-serif; font-size: 14px; line-height: 24px; padding: 10px 3px 3px 3px; margin: 5px 5px 5px 5px;; text-align: justify; text-justify: inter-word;"
+            class="text-center">
+            <h1 style="color: #ffffff; font-family: 'Helvetica Neue', sans-serif; font-size: 75px; font-weight: bold; letter-spacing: -1px; line-height: 1; text-align: center;">What do you do here?</h1>
+
+            <div class="text-center">
+              <p style="color: #ffffff; font-size: 33px; font-family: 'Helvetica Neue', sans-serif; font-weight: bold; letter-spacing: -1px; line-height: 1;">We are Creators who collaborate with you to produce original content for your brand, business, or idea.</p>
+            </div>
+
+            <hr>
+
+            <h2 style="color: #ffffff; font-family: 'Open Sans', sans-serif; font-size: 30px; font-weight: 300; line-height: 32px;">Our community of creatives help brand visionaries engage modern audiences to test ideas and grow businesses through stories and experiences that heighten the senses, capture the imagination and motivate action.</h2>
+
+            <br>
+
+            <section class="color-4">
+              <nav class="cl-effect-12">
+                <a href="{% url 'index' %}">Return Home</a>
+                <a href="{% url 'sign_up' %}">Signup</a>
+              </nav>
+            </section>
+        </div>
+      </section>
+
+      <hr>
+
+      <h2>How does it work?</h2>
+      <h3 style="font-family: 'Open Sans', sans-serif; font-size: 30px; font-weight: 300; line-height: 32px;">First, you list a Project or Product that you want to gain awareness of or grow.
+        <br>Second, you submit your goals and desired outcomes in a Campaign.
+        <br>Once approved and published, our Community of Creatives are notified and begin work.
+        <br><br>They submit samples or examples within the initial 3-day Bid Accceptance period.
+        <br>The one (or more) you select to proceed to completion then deliver within the standard 5-day Production period.
+        <br><br>Not long after, you have original art, content and media to support your brand vision no matter where you are in your content production journey.</h3>
+      <hr>
+      <h2>What types of art, content or media?</h2>
+      <h3 style="#ffffff; font-family: 'Open Sans', sans-serif; font-size: 30px; font-weight: 300; line-height: 32px;">May include but not limited to: original copywriting, writing deliverables, photography, voiceover,  videography, sketches, code samples, survey results, comedic performances, translations, honest reactions, graphic designs, web layouts, prototypes</h3>
+      <br>
+
+      <h2>What don't you do?</h2>
+      <h3 style="font-family: 'Open Sans', sans-serif; font-size: 30px; font-weight: 300; line-height: 32px;">We do  not permit or condone illegal, lewed, lascivious or otherwise out-of-taste behavior, request, or solicitation.</h3>
+
+      <div class="text-center">
+        <a href="{% url 'sign_up' %}">
+        <button type="button" class="btn btn-success btn-lg float-none">
+          Get started
+          <span class="sr-only">Get started</span>
+        </button></a>
+      </div>
+
+      <br>
+      <section class="color-5">
+        <nav class="cl-effect-12">
+          <a href="{% url 'index' %}">Return Home</a>
+          <a href="{% url 'sign_up' %}">Signup</a>
+        </nav>
+      </section>
+
+</main>
+
+{% endblock %}

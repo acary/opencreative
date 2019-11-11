@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+
+{% if error %}
+<div class="alert alert-warning" role="alert">
+  {{ error}}
+</div>
+{% endif %}
+
+<div class="container">
+
+  <h1 class="text-center pt-3"><i class="fas fa-user-plus"></i> Sign up!</h1>
+
+  <div class="col-md-10 offset-md-2">
+
+    <form method="POST" action="{% url 'sign_up' %}">
+      {% csrf_token %}
+
+      {{ form.as_ul }}
+      <button type="submit" class="btn btn-primary">Sign Up</button>
+
+    </form>
+
+      <small><a href="/accounts/login">Already have an account? Log in</a></small>
+      <br>
+      <small><a href="#?org=true">Business or Organization?</a></small>
+  </div>
+</div>
+{% endblock %}

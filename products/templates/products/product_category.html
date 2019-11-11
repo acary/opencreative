@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block page_content %}
+
+<div class="col-md-12 py-1">
+
+  <small><a href="{% url 'products' %}">Products</a> > Category</small>
+  <h1>{{ category | title }}</h1>
+  <hr>
+
+  {% for product in products %}
+    <div class="row py-3">
+      <div class="col-2" onclick="window.location='{% url 'detail' product.id %}';" style="cursor:pointer;">
+        <img src="{{ product.image.url }}" class="img-fluid" style="max-width:150px;" />
+      </div>
+      <div class="col-6" onclick="window.location='{% url 'detail' product.id %}';" style="cursor:pointer;">
+        <h1>{{ product.title }}</h1>
+        <p>{{ product.summary }}</p>
+
+        <small>
+            {% for category in product.categories.all %}
+            <a href="{% url 'product_category' category.name %}">
+                <span class="badge badge-secondary">{{ category.name }}</a>
+            </a>&nbsp;
+
+            {% endfor %}
+        </small>
+      </div>
+      <div class="col-4">
+        <a href="javascript:{document.getElementById('upvote {{ product.id }}').submit()}"><button class="btn btn-primary btn-lg btn-block"><i class="fa fa-arrow-up"></i> Upvote ({{ product.votes_total }})</button></a>
+        <p><a href="{% url 'brand' product.contributor.username %}"><i class="fa fa-binoculars" aria-hidden="true"></i> Contributed by {{ product.contributor.username }}</a><br>
+        <i class="fa fa-clock-o" aria-hidden="true"></i> {{ product.pub_date_pretty }}</p>
+      </div>
+    </div>
+
+    <form id="upvote {{ product.id }}" method="POST" action="{% url 'upvote' product.id %}">
+      {% csrf_token %}
+      <input type="hidden">
+    </form>
+
+  {% endfor %}
+
+</div>
+
+{% endblock %}

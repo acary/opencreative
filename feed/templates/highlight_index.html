@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block page_content %}
+<div class="col-md-8 offset-md-2">
+    <h1 class="text-center">Highlights</h1>
+    <hr>
+    {% for post in posts %}
+
+    <div class="container">
+      <div class="text-center">
+        <a href="{% url 'highlight_detail' post.id%}">
+          <img src="{{ post.image.url }}" style="width:400px;" alt="{{ post.caption }}">
+        </a>
+        <p>{{ post.detail | slice:":400" }}</p>
+      </div>
+    </div>
+
+    {% endfor %}
+
+    <div class="text-center">
+      <a href="{% url 'highlight_index' %}"><i class="fas fa-redo"></i></a>
+    </div>
+</div>
+{% endblock %}

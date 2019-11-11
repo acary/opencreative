@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block page_content %}
+<div class="col-md-8 offset-md-2">
+    <h1>Create New Playlist</h1>
+    <hr>
+    <form method="post">
+      {% csrf_token %}
+
+      {{ form.as_p }}
+      <button type="submit" value="Create Playlist" class="btn btn-primary">Create</button>
+    </form>
+</div>
+{% endblock %}

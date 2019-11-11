@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block page_content %}
+<div class="col-md-8 offset-md-2">
+    <h1>Edit Playlist</h1>
+    <hr>
+    <form method="post">
+      {% csrf_token %}
+
+      {{ form.as_p }}
+      <button type="submit" value="Save" class="btn btn-primary">Save</button>
+    </form>
+
+    <a href="{% url 'delete_playlist' playlist.id %}" class="btn btn-danger">Delete this Playlist</a>
+</div>
+{% endblock %}

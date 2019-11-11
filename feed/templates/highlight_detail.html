@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block page_content %}
+<div id="highlight-detail" class="col-md-8 offset-md-2 py-2">
+  {% load humanize %}
+  <a href="{{ link }}">
+    <h2>{{ caption }}</h2>
+    <img src="{{ image.url }}" style="max-height:300px;" class="text-center" alt="{{ caption }}">
+  </a>
+  <br>
+
+  <small>
+    <span class="badge badge-light">{{ created_on|naturaltime }}</span>
+  </small>
+  <br />
+
+  <p>{{ detail }}</p>
+
+  <a href="{{ link }}">
+    <button type="button" class="btn btn-primary btn-sm">
+      More
+      <span class="sr-only">More</span>
+    </button>
+  </a>
+
+  <div class="text-center">
+    <a href="{% url 'highlight_index' %}"><i class="fas fa-sync"></i></a>
+  </div>
+</div>
+{% endblock %}

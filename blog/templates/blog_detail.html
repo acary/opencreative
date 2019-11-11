@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block page_content %}
+<div class="col-md-8 offset-md-2 py-3">
+    {% load humanize %}
+    <h1>{{ post.title }}</h1>
+    <span class="badge badge-light">{{ post.created_on.date }}</span>
+    <img src="{{ post.image.url }}" alt="{{ post.title }}" class="img-fluid">
+
+    <div class="" style="margin: 5px 2px 5px 2px;">
+      <a href="javascript:{document.getElementById('post_upvote').submit()}">
+      <button type="button" class="btn btn-primary">
+        <i class="fa fa-arrow-up"></i> <span class="badge badge-light">{{ post.votes_total }}</span>
+        <span class="sr-only">Upvote</span>
+      </button></a>
+    </div>
+
+    <form id="post_upvote" method="POST" action="{% url 'post_upvote' post.id %}">
+      {% csrf_token %}
+      <input type="hidden">
+    </form>
+
+    <p>{{ post.body | linebreaks }}</p>
+
+    <small>
+        {{ post.created_on.date }} |
+        {% for category in post.categories.all %}
+        <a href="{% url 'blog_category' category.name %}">
+            {{ category.name }}
+        </a>&nbsp;
+        {% endfor %}
+    </small>
+
+    <hr>
+
+    {% for comment in comments %}
+    <p><strong>{{ comment.author }}</strong> {{ comment.body }}</p>
+    {% endfor %}
+
+    {% if user.is_authenticated %}
+      <strong>Add a comment...</strong>
+      <form action="/blog/{{ post.pk }}/" method="post">
+          {% csrf_token %}
+          <div class="form-group">
+              {{ form.author }}
+          </div>
+          <div class="form-group">
+              {{ form.body }}
+          </div>
+          <button type="submit" class="btn btn-primary">Post</button>
+      </form>
+    {% else %}
+      <a href="{% url 'login' %}"><button class="btn-primary btn-sm">Login</button></a>
+      to <strong>add a comment...</strong>
+    {% endif %}
+
+    <br><br>
+    <a class="" href="{% url 'posts' %}"><i class="fas fa-chevron-circle-left"></i> <i class="far fa-newspaper"></i></a>
+</div>
+{% endblock %}

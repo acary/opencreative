@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+<main role="main">
+  {% load staticfiles %}
+
+  {% if user.is_authenticated %}
+
+  <div class="">
+    <section class="color-5">
+      <nav class="cl-effect-12">
+        <a href="/discover">Discover</a>
+        <a href="/create">Create</a>
+        <a href="/publish">Publish</a>
+        <a href="/track">Track</a>
+      </nav>
+    </section>
+  </div>
+
+  <p class="text-right"><small><i class="fas fa-door-open"></i> Welcome, {{ user.username }}!
+  </small>
+  </p>
+
+  <div class="container" style="min-height:300px;">
+
+    <a name="track">
+    <h1>Track</h1>
+    <hr>
+    {% if user.username == 'km8ac' %}
+    <h5>Site analytics</h5>
+
+    <table class="table table-striped table-borderless table-hover table-sm">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Object</th>
+        <th scope="col">Count</th>
+        <th scope="col">Cost</th>
+        <th scope="col">Value</th>
+        <th scope="col">Profit</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="table-primary">
+        <th scope="row">Users</th>
+        <td>{{ users }} users</td>
+        <td>$0</td>
+        <td>$400</td>
+        <td>$400</td>
+      </tr>
+      <tr class="table-secondary">
+        <th scope="row">Revenue</th>
+        <td>0 transactions</td>
+        <td>$10</td>
+        <td>$10</td>
+        <td>$0</td>
+      </tr>
+      <tr class="table-success">
+        <th scope="row">Projects</th>
+        <td><a href="{% url 'project_index' %}" target="_blank">{{ projects }} projects</a></td>
+        <td>$100</td>
+        <td>$100</td>
+        <td>$0</td>
+      </tr>
+      <tr class="table-info">
+        <th scope="row">Playlists</th>
+        <td><a href="{% url 'playlists' %}" target="_blank">{{ playlists }} playlists</a></td>
+        <td>$15</td>
+        <td>$30</td>
+        <td>$15</td>
+      </tr>
+      <tr class="table-info">
+        <th scope="row">Products</th>
+        <td><a href="{% url 'products' %}" target="_blank">{{ products }} products</a></td>
+        <td>$100</td>
+        <td>$200</td>
+        <td>$100</td>
+      </tr>
+      <tr class="table-light">
+        <th scope="row">News Posts</th>
+        <td><a href="{% url 'posts' %}" target="_blank">{{ posts }} posts</a></td>
+        <td>$10</td>
+        <td>$25</td>
+        <td>$15</td>
+      </tr>
+      <tr class="table-light">
+        <th scope="row">Highlights</th>
+        <td><a href="{% url 'highlight_index' %}" target="_blank">{{ highlights }} highlights</a></td>
+        <td>$200</td>
+        <td>$200</td>
+        <td>$200</td>
+      </tr>
+    </tbody>
+  </table>
+
+    {% else %}
+    <p>Not km8ac...</p>
+    {% endif %}
+
+    <br>
+
+  </div>
+
+  {% else %}
+
+  <section class="jumbotron text-center mt-3" style='background-image: url("https://source.unsplash.com/weekly?travel");background-repeat: no-repeat; background-size: 100%; margin: 5px 5px 5px 5px;'>
+    <div class="container" style='min-height:300px;'>
+      <div style="background-color:rgba(0,0,0,0.5); color: #ffffff; font-family: 'Helvetica Neue', sans-serif; font-size: 14px; line-height: 24px; padding: 10px 3px 3px 3px; margin: 5px 5px 5px 5px;; text-align: justify; text-justify: inter-word;"
+        class="text-center">
+        <h1 style="color: #ffffff; font-family: 'Helvetica Neue', sans-serif; font-size: 75px; font-weight: bold; letter-spacing: -1px; line-height: 1; text-align: center;">Join a community of creators</h1>
+        <h2 style="color: #ffffff; font-family: 'Open Sans', sans-serif; font-size: 30px; font-weight: 300; line-height: 32px; text-align: center;">Are you interested in Food, Music, and Film?</h2>
+
+        <section class="color-10">
+          <nav class="cl-effect-8">
+            <a href="{% url 'sign_up' %}">Signup</a>
+            <a href="{% url 'about' %}">Learn more</a>
+          </nav>
+        </section>
+
+        <h5>You'll be glad you did.</h5>
+      </div>
+    </div>
+  </section>
+
+  <div class="album py-3 bg-light">
+    <div class="container">
+      <h4 class="text-muted" style="font-family: 'Helvetica Neue', sans-serif; font-size: 32px; font-weight: bold; letter-spacing: -1px; line-height: 1;">Highlights</h4>
+      <div class="row">
+        {% for post in posts.all %}
+        <div class="col-md-4">
+          <div class="card mb-4 box-shadow">
+            <a href="{% url 'highlight_detail' post.id%}">
+              <img class="card-img-top img-fluid" src="{{ post.image.url}}" alt="">
+            </a>
+            <div class="card-body">
+              <p class="card-text">{{ post.caption }}</p>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+</main>
+
+{% endblock %}

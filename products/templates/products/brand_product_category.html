@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block page_content %}
+
+<div class="col-md-12 py-1">
+
+  <small><a href="{% url 'products' %}">Products</a> > <a href="{% url 'brand' contributor %}">{{ contributor|capfirst }}</a> > {{ category|capfirst }}</small>
+
+  <h1>{{ contributor|capfirst }}</h1>
+  <span class="badge badge-secondary">{{ category | title }}</span>
+
+  <hr>
+
+  {% for product in products %}
+    <div class="row py-3">
+      <div class="col-2" onclick="window.location='{% url 'detail' product.id %}';" style="cursor:pointer;">
+        <img src="{{ product.image.url }}" class="img-fluid" style="max-width:150px;" />
+      </div>
+      <div class="col-6" onclick="window.location='{% url 'detail' product.id %}';" style="cursor:pointer;">
+        <h1>{{ product.title }}</h1>
+        <p>{{ product.summary }}</p>
+
+        <small>
+            {% for category in product.categories.all %}
+            <a href="{% url 'brand_product_category' contributor category %}">
+                  <span class="badge badge-secondary">{{ category.name }}</a>
+            &nbsp;
+
+            {% endfor %}
+        </small>
+      </div>
+      <div class="col-4">
+
+        <a href="{% url 'detail' product.id %}"><button class="btn btn-success btn-lg btn-block">Get it!</button></a>
+      </div>
+    </div>
+
+  {% endfor %}
+
+</div>
+
+{% endblock %}
