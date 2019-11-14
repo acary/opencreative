@@ -2,6 +2,18 @@
 # Created by https://www.gitignore.io/api/django
 # Edit at https://www.gitignore.io/?templates=django
 
+### OpenCreative ###
+app.yaml
+accounts/migrations/
+blog/migrations/
+feed/migrations/
+mysite/mysite/settings.py
+playlists/migrations/
+products/migrations/
+projects/migrations/
+social/migrations/
+cloud_sql_proxy
+
 ### Django ###
 *.log
 *.pot
