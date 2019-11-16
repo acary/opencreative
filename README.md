@@ -31,14 +31,15 @@ Note: if Anaconda is running, like (base), run: ``` conda deactivate ```
 ### Set up database
 1. Ensure Postgres 11 is running on port 5432
 2. Run: ``` python manage.py makemigrations ``` and for each module:
-'''
+
+```
 python manage.py makemigrations blog
 python manage.py makemigrations feed
 python manage.py makemigrations playlists
 python manage.py makemigrations products
 python manage.py makemigrations projects
 python manage.py makemigrations social
-'''
+```
 
 3. Run: ``` python manage.py migrate ``` to apply migrations
 
