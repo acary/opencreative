@@ -3,10 +3,10 @@
 This is an open-source project for creators using Django. Pull requests welcome.
 
 ## Home screen
-<img width="774" alt="Screenshot 2019-11-11 14 42 18" src="https://user-images.githubusercontent.com/1522180/68619660-7fda3f80-0491-11ea-9dcc-8de86e5acf93.png">
+<img width="960" alt="Open Creative" src="https://user-images.githubusercontent.com/1522180/68985567-0e75f600-07dd-11ea-8e90-a19729d769bc.png">
 
 ## Upvote content
-<img width="1153" alt="Screenshot 2019-11-11 14 58 27" src="https://user-images.githubusercontent.com/1522180/68620742-c0d35380-0493-11ea-9c95-8637a58dba1f.png">
+<img width="960" alt="Open Creative - Projects" src="https://user-images.githubusercontent.com/1522180/68985595-3d8c6780-07dd-11ea-97ca-c3fa83caeee9.png">
 
 ## Getting Started
 
