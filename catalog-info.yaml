@@ -1,0 +1,10 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: opencreative
+  annotations:
+    github.com/project-slug: acary/opencreative
+spec:
+  type: other
+  lifecycle: unknown
+  owner: andy
